@@ -62,7 +62,47 @@ require_once "../layout/head.html";
     <fieldset class="border" style="margin-top: 20px;">
         <legend class="fw-bold" style="color: #2196F5; font-size: 13px;">SERVIÇO</legend>
 
-        <p><label class="px-2" style="font-size: 13px;">Serviço Prestado:</label> <label style="font-size: 12px;" class="fw-bold">No Município</label></p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Serviço</th>
+                    <th scope="col">Valor Unitário</th>
+                    <th scope="col">Quantidade</th>
+                    <th scope="col">Dedução</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td scope="col">
+
+                        <input type="number" class="form-control">
+
+                    </td>
+                    <td scope="col">
+
+                        <input type="number" class="form-control">
+
+                    </td>
+                    <td scope="col">
+
+                        <input type="number" class="form-control">
+
+                    </td>
+                    <td scope="col">
+
+                        <input type="number" class="form-control">
+
+                    </td>
+                    <td scope="col">
+                        <img src="../imgs/seta-curva-para-baixo.png" width="20px">
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
 
 
     </fieldset>
