@@ -50,7 +50,7 @@ require_once "../layout/head.html";
                 </div>
             </div>
             </p>
-
+        </div>
     </fieldset>
     <fieldset class="border" style="margin-top: 20px;">
         <legend class="fw-bold" style="color: #2196F5; font-size: 13px;">TRIBUTAÇÃO</legend>
@@ -102,6 +102,102 @@ require_once "../layout/head.html";
 
             </tbody>
         </table>
+
+
+
+    </fieldset>
+    <fieldset class="border" style="margin-top: 20px;">
+        <legend class="fw-bold" style="color: #2196F5; font-size: 13px;">TOTAIS</legend>
+
+        <table class="table">
+            <thead class="table-success table-striped">
+                <tr>
+                    <th scope="col">PIS R$</th>
+                    <th scope="col">Cofins R$</th>
+                    <th scope="col">CSLL R$</th>
+                    <th scope="col">IRRF R$</th>
+                    <th scope="col">INSS R$</th>
+                    <th scope="col">Outras Retenções</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td scope="col">
+
+                        <input type="number" class="form-control">
+
+                    </td>
+                    <td scope="col">
+
+                        <input type="number" class="form-control">
+
+                    </td>
+                    <td scope="col">
+
+                        <input type="number" class="form-control">
+
+                    </td>
+                    <td scope="col">
+
+                        <input type="number" class="form-control">
+
+                    </td>
+                    <td scope="col">
+                        <input type="number" class="form-control">
+                    </td>
+                    <td scope="col">
+                        <input type="number" class="form-control">
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+
+
+    </fieldset>
+    <fieldset class="border" style="margin-top: 20px;">
+        <legend class="fw-bold" style="color: #2196F5; font-size: 13px;">DESCRIÇÃO GERAL DO SERVIÇO</legend>
+        <div class="row mb-1">
+            <div class="mb-12">
+
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+        </div>
+
+    </fieldset>
+    <fieldset class="border" style="margin-top: 20px;">
+        <legend class="fw-bold" style="color: #2196F5; font-size: 13px;">SUBSTITUIÇÃO DO RECIBO PROVISÓRIO DE SERVIÇOS (RPS) POR NFS-E</legend>
+
+        <div class="row g-1 m-t-2">
+            <div class="col-md-1">
+                <label for="staticEmail2">Nº do RPS:</label>
+
+            </div>
+            <div class="col-md-2">
+                <input type="text" class="form-control">
+            </div>
+            <div class="col-md-1">
+                <label for="staticEmail2"> Série do RPS:</label>
+            </div>
+            <div class="col-md-2">
+                <label for="staticEmail2"> Data de Emissão do RPS:</label>
+            </div>
+            <div class="col-md-2">
+                <input type="date" class="form-control">
+            </div>
+
+            <div class="col-md-2">
+                <label for="staticEmail2">Código de Verificação:</label>
+
+            </div>
+            <div class="col-md-1">
+                <input type="text" class="form-control">
+            </div>
+
+
+        </div>
 
 
 
