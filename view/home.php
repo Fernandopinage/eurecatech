@@ -115,7 +115,27 @@ require_once "../layout/head.html";
                     <?php
                         $hg = file_get_contents("https://servicodados.ibge.gov.br/api/v2/cnae/classes");
                         echo "<pre>";
-                        var_dump(json_decode($hg));
+                        $hg = json_decode($hg);
+
+                       echo "inicio:";
+                       print_r($hg[0]->grupo);
+                       $objto = $hg[0]->grupo;
+                       echo "<hr>";
+
+                       echo "id:";
+                       print_r($objto->id);
+                       echo "<hr>";
+
+                       echo "divisao:";
+                       print_r($objto->divisao);
+                       $objto2 = $objto->divisao;
+                       echo "<hr>";
+
+                       
+                       echo "descricao:";
+                       print_r($objto2->descricao);
+
+
                         echo "</pre>";
                     ?>
                     </div>
