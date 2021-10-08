@@ -66,6 +66,7 @@ require_once "../layout/head.html";
             <thead>
                 <tr>
                     <th scope="col">Serviço</th>
+                    <th scope="col"></th>
                     <th scope="col">Valor Unitário</th>
                     <th scope="col">Quantidade</th>
                     <th scope="col">Dedução</th>
@@ -77,18 +78,20 @@ require_once "../layout/head.html";
                 <tr>
                     <td scope="col">
 
-                        <input type="text" class="form-control"><input class="btn btn-outline-secondary" type="submit" name="*" data-bs-toggle="modal" data-bs-target="#exampleModal">
-
-                    </td>
-
-                    <td scope="col">
-
-                        <input type="number" class="form-control">
+                        <input type="text" class="form-control">
 
                     </td>
                     <td scope="col">
+                    <img src="../imgs/prompt_old.gif" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    </td>
+                    <td scope="col">
 
-                        <input type="number" class="form-control">
+                        <input type="text" value="0,00" class="form-control">
+
+                    </td>
+                    <td scope="col">
+
+                        <input type="number" value="1" class="form-control">
 
                     </td>
                     <td scope="col">
@@ -131,7 +134,7 @@ require_once "../layout/head.html";
                        $objto2 = $objto->divisao;
                        echo "<hr>";
 
-                       
+
                        echo "descricao:";
                        print_r($objto2->descricao);
 
