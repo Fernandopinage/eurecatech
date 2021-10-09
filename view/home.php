@@ -1,5 +1,6 @@
 <?php
 require_once "../layout/head.html";
+require_once "../controller/consulta.php";
 ?>
 
 <div class="container">
@@ -116,6 +117,7 @@ require_once "../layout/head.html";
                     </div>
                     <div class="modal-body">
                     <?php
+                    /*
                         $hg = file_get_contents("https://servicodados.ibge.gov.br/api/v2/cnae/classes");
                         echo "<pre>";
                         $hg = json_decode($hg);
@@ -139,6 +141,13 @@ require_once "../layout/head.html";
                        print_r($objto2->descricao);
 
 
+                        echo "</pre>";
+                        */
+
+                        $consulta = new Consulta();
+                        $dados = $consulta->getAPI();
+                        echo "<pre>";
+                        var_dump($dados);
                         echo "</pre>";
                     ?>
                     </div>
