@@ -1,6 +1,8 @@
 <?php
-require_once "../layout/head.html";
-require_once "../controller/consulta.php";
+include_once "../layout/head.html";
+include_once "../controller/consulta.php";
+include_once "../dao/codDao.php";
+
 ?>
 
 <div class="container">
@@ -68,22 +70,30 @@ require_once "../controller/consulta.php";
                 <tr>
                     <th scope="col">Serviço</th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
                     <th scope="col">Valor Unitário</th>
                     <th scope="col">Quantidade</th>
                     <th scope="col">Dedução</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
+
+
+
+
             <tbody>
 
                 <tr>
                     <td scope="col">
 
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" id="codigo" name="codigo">
 
                     </td>
                     <td scope="col">
-                    <img src="../imgs/prompt_old.gif" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <img src="../imgs/prompt_old.gif" id="search" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    </td>
+                    <td scope="col">
+                        <label id="discricao"></label>
                     </td>
                     <td scope="col">
 
@@ -106,54 +116,97 @@ require_once "../controller/consulta.php";
                 </tr>
 
             </tbody>
+
+
         </table>
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">CONSULTA DE SERVIÇO</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                    <?php
-                    /*
-                        $hg = file_get_contents("https://servicodados.ibge.gov.br/api/v2/cnae/classes");
-                        echo "<pre>";
-                        $hg = json_decode($hg);
-
-                       echo "inicio:";
-                       print_r($hg[0]->grupo);
-                       $objto = $hg[0]->grupo;
-                       echo "<hr>";
-
-                       echo "id:";
-                       print_r($objto->id);
-                       echo "<hr>";
-
-                       echo "divisao:";
-                       print_r($objto->divisao);
-                       $objto2 = $objto->divisao;
-                       echo "<hr>";
 
 
-                       echo "descricao:";
-                       print_r($objto2->descricao);
+                        <p class="text-center"><b>LISTA DE SERVIÇOS</b></p>
+                        <hr>
+
+                        <fieldset class="border" style="margin-top: 30px; padding:30px">
+                            <legend class="fw-bold" style="color: #2196F5; font-size: 13px;">SERVIÇOS</legend>
+                            <form method="POST">
+
+                                <div class="mx-sm-3 mb-2">
+                                    <label for="recipient-name" class="col-form-label">Nome do Serviço:</label>
+                                    <input type="text" class="form-control" id="recipient-name">
+                                </div>
+                                <div class="mx-sm-3 mb-2">
+                                    <label for="message-text" class="col-form-label">Código do Serviço:</label>
+                                    <input type="text" class="form-control" id="recipient-name">
+                                </div>
+
+                            </form>
+                            <div class="text-center" style="margin-top: 20px;">
+
+                                <button type="button" class="btn btn-primary" onclick="lista()">Lista Serviços da Empresa</button>
+                            </div>
+                        </fieldset>
+                        <br><br>
+
+                        <fieldset class="border" style="margin-top: 30px; padding:30px; display:none" id="total">
 
 
-                        echo "</pre>";
-                        */
 
-                        $consulta = new Consulta();
-                        $dados = $consulta->getAPI();
-                        echo "<pre>";
-                        var_dump($dados);
-                        echo "</pre>";
-                    ?>
+                            <?php
+
+                            $Cod = new CodDao();
+                            $dados = $Cod->selectCodigo();
+
+                            echo "<pre>";
+                            //var_dump($dados);
+                            echo "</pre>";
+
+                            $tamanho = count($dados);
+
+
+
+
+                            for ($i = 0; $i < $tamanho; $i++) {
+
+                            ?>
+                                <div class="mb-2 row">
+
+                                    <div class="col-sm-12">
+
+                                        <span class="form-text fs-5"> <b><?php echo $dados[$i]['codigo']; ?></b> - <?php echo strtoupper($dados[$i]['descricao']); ?> </span>
+
+                                    </div>
+                                </div>
+
+                            <?php
+
+                            }
+                         
+                            ?>
+                            <div class="text-end">
+
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        <li class="page-item"><a class="page-link" href="#">Anterior</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">...</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">Próximo</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+
+                        </fieldset>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+
                     </div>
                 </div>
             </div>
@@ -263,3 +316,20 @@ require_once "../controller/consulta.php";
 require_once "../layout/footer.html";
 
 ?>
+
+<script>
+    $(document).ready(function() {
+
+        document.getElementById('total').style.display = 'none'
+    });
+
+    function lista() {
+
+        if (document.getElementById('total').style.display == 'none') {
+            document.getElementById('total').style.display = 'block'
+        } else {
+            document.getElementById('total').style.display = 'none'
+        }
+
+    }
+</script>
