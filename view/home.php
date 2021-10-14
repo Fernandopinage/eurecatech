@@ -3,6 +3,17 @@ include_once "../layout/head.html";
 include_once "../controller/consulta.php";
 include_once "../dao/codDao.php";
 
+$Cod = new CodDao();
+if (isset($_POST['submet'])) {
+
+
+    $codigo = $_POST['codigo_servico'];
+    $descr = $_POST['desc_servico'];
+
+    $dado = $Cod->selectCNAE($codigo, $descr);
+}
+
+
 ?>
 
 <div class="container">
@@ -86,14 +97,49 @@ include_once "../dao/codDao.php";
                 <tr>
                     <td scope="col">
 
-                        <input type="text" class="form-control" id="codigo" name="codigo">
+                        <?php
+
+                        if (isset($dado[0]['codigo'])) {
+
+                            $filtro = trim($dado[0]['codigo']);
+                        }
+
+                        ?>
+
+                        <?php 
+                        
+                        if(isset($filtro)){
+
+                            ?>
+                            <input type="text" class="form-control" id="codigo" name="codigo" value="<?php echo $filtro; ?>">
+                            
+                            <?php
+                        }else{
+                            ?>
+                            <input type="text" class="form-control" id="codigo" name="codigo" value="">
+                            
+                            <?php
+                        }
+                        
+                        ?>
 
                     </td>
                     <td scope="col">
                         <img src="../imgs/prompt_old.gif" id="search" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     </td>
                     <td scope="col">
-                        <label id="discricao"></label>
+                        <label><?php
+
+                                if (isset($dado[0]['descricao'])) {
+
+                                    echo strtoupper($dado[0]['descricao']);
+                                }
+                                ?>
+                        </label>
+
+
+
+                        <input type="hidden" name="" value="<?php echo $filtro; ?>">
                     </td>
                     <td scope="col">
 
@@ -135,24 +181,32 @@ include_once "../dao/codDao.php";
 
                         <fieldset class="border" style="margin-top: 30px; padding:30px">
                             <legend class="fw-bold" style="color: #2196F5; font-size: 13px;">SERVIÇOS</legend>
-                            <form method="POST">
+                            <form action="" method="POST">
 
                                 <div class="mx-sm-3 mb-2">
                                     <label for="recipient-name" class="col-form-label">Nome do Serviço:</label>
-                                    <input type="text" class="form-control" id="recipient-name">
+                                    <input type="text" class="form-control" id="desc_servico" name="desc_servico">
                                 </div>
                                 <div class="mx-sm-3 mb-2">
                                     <label for="message-text" class="col-form-label">Código do Serviço:</label>
-                                    <input type="text" class="form-control" id="recipient-name">
+                                    <input type="text" class="form-control" id="codigo_servico" name="codigo_servico">
                                 </div>
-
+                                <div class="text-end" style="margin-top: 20px;">
+                                    <button type="submit" name="submet" class="btn btn-primary">Pesquisar</button>
+                                </div>
                             </form>
-                            <div class="text-center" style="margin-top: 20px;">
 
-                                <button type="button" class="btn btn-primary" onclick="lista()">Lista Serviços da Empresa</button>
-                            </div>
                         </fieldset>
+                        <?php
+
+
+
+                        ?>
                         <br><br>
+                        <div class="text-center" style="margin-top: 20px;">
+
+                            <button type="button" class="btn btn-primary" onclick="lista()">Lista Serviços da Empresa</button>
+                        </div>
 
                         <fieldset class="border" style="margin-top: 30px; padding:30px; display:none" id="total">
 
@@ -160,34 +214,33 @@ include_once "../dao/codDao.php";
 
                             <?php
 
-                            $Cod = new CodDao();
+
                             $dados = $Cod->selectCodigo();
 
                             echo "<pre>";
                             //var_dump($dados);
                             echo "</pre>";
 
-                            $tamanho = count($dados);
 
 
-
-
-                            for ($i = 0; $i < $tamanho; $i++) {
+                            foreach ($dados as $dados) {
 
                             ?>
+
                                 <div class="mb-2 row">
 
                                     <div class="col-sm-12">
 
-                                        <span class="form-text fs-5"> <b><?php echo $dados[$i]['codigo']; ?></b> - <?php echo strtoupper($dados[$i]['descricao']); ?> </span>
+                                        <span class="form-text fs-5"> <b><?php echo $dados['codigo']; ?></b> - <?php echo strtoupper($dados['descricao']); ?></span>
 
                                     </div>
                                 </div>
 
-                            <?php
 
+                            <?php
                             }
-                         
+
+
                             ?>
                             <div class="text-end">
 
