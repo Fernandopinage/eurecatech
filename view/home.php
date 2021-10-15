@@ -10,7 +10,14 @@ if (isset($_POST['submet'])) {
     $codigo = $_POST['codigo_servico'];
     $descr = $_POST['desc_servico'];
 
-    $dado = $Cod->selectCNAE($codigo, $descr);
+
+    if(!empty($_POST['codigo_servico'])){
+
+        $dado = $Cod->selectCNAEcodigo($codigo);
+    }else{
+        $dado = $Cod->selectCNAEdescricao($descr);
+    }
+
 }
 
 
@@ -99,9 +106,9 @@ if (isset($_POST['submet'])) {
 
                         <?php
 
-                        if (isset($dado[0]['codigo'])) {
+                        if (isset($dado[0]['servico'])) {
 
-                            $filtro = trim($dado[0]['codigo']);
+                            $filtro = trim($dado[0]['servico']);
                         }
 
                         ?>
@@ -184,12 +191,12 @@ if (isset($_POST['submet'])) {
                             <form action="" method="POST">
 
                                 <div class="mx-sm-3 mb-2">
-                                    <label for="recipient-name" class="col-form-label">Nome do Serviço:</label>
-                                    <input type="text" class="form-control" id="desc_servico" name="desc_servico">
-                                </div>
-                                <div class="mx-sm-3 mb-2">
                                     <label for="message-text" class="col-form-label">Código do Serviço:</label>
                                     <input type="text" class="form-control" id="codigo_servico" name="codigo_servico">
+                                </div>
+                                <div class="mx-sm-3 mb-2">
+                                    <label for="recipient-name" class="col-form-label">Nome do Serviço:</label>
+                                    <input type="text" class="form-control" id="desc_servico" name="desc_servico">
                                 </div>
                                 <div class="text-end" style="margin-top: 20px;">
                                     <button type="submit" name="submet" class="btn btn-primary">Pesquisar</button>
@@ -231,7 +238,7 @@ if (isset($_POST['submet'])) {
 
                                     <div class="col-sm-12">
 
-                                        <span class="form-text fs-5"> <b><?php echo $dados['codigo']; ?></b> - <?php echo strtoupper($dados['descricao']); ?></span>
+                                        <span class="form-text fs-5"> <b><?php echo $dados['servico']; ?></b> - <?php echo strtoupper($dados['descricao']); ?></span>
 
                                     </div>
                                 </div>
@@ -267,8 +274,43 @@ if (isset($_POST['submet'])) {
 
 
     </fieldset>
+
     <fieldset class="border" style="margin-top: 20px;">
-        <legend class="fw-bold" style="color: #2196F5; font-size: 13px;">TOTAIS</legend>
+        <legend class="fw-bold" style="color: #2196F5; font-size: 13px;">DESCRIÇÃO</legend>
+        <table class="table">
+            <thead class="table-primary table-striped">
+                <tr>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Vlr.Serviço</th>
+                    <th scope="col">Qtd</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Vlr.Dedução</th>
+                    <th scope="col">Base de Cálculo</th>
+                    <th scope="col">Alíquota</th>
+                    <th scope="col">Vlr. Iss</th>
+                    <th scope="col">Add Item</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <td scope="col"><input type="number" class="form-control"></td>
+                    <td scope="col"><input type="number" class="form-control"></td>
+                    <td scope="col"><input type="number" class="form-control"></td>
+                    <td scope="col"><input type="number" class="form-control"></td>
+                    <td scope="col"><input type="number" class="form-control"></td>
+                    <td scope="col"><input type="number" class="form-control"></td>
+                    <td scope="col"><input type="number" class="form-control"></td>
+                    <td scope="col"><input type="number" class="form-control"></td>
+                    <td scope="col"><input type="number" class="form-control"></td>
+            </tbody>
+        </table>
+    </fieldset>
+
+
+
+
+
+    <fieldset class="border" style="margin-top: 20px;">
+        <legend class="fw-bold" style="color: #357EBD; font-size: 13px;">SERVIÇO</legend>
 
         <table class="table">
             <thead class="table-success table-striped">

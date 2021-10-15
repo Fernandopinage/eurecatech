@@ -10,7 +10,7 @@ class CodDao extends Dao{
 
         $array = array();
 
-        $sql = "SELECT * FROM `cnae` where  codigo LIMIT 10 ";
+        $sql = "SELECT * FROM `cnae` where  servico <> 0 LIMIT 10 ";
 
         $select = $this->con->prepare($sql);
         $select->execute();
@@ -30,17 +30,36 @@ class CodDao extends Dao{
 
     }
 
-    public function selectCNAE($codigo,$descr){
+    public function selectCNAEcodigo($codigo){
 
-        $parametro1 = '%'.$codigo.'%';
-     
-        $parametro2 = $descr.'%';
-
-
-        $sql = "SELECT * FROM `cnae` where  `codigo`  LIKE  :codigo ";
+        $sql = "SELECT * FROM `cnae` where  `servico`  =  :servico ";
         $select = $this->con->prepare($sql);
-        $select->bindValue(':codigo', $parametro1);
+        $select->bindValue(':servico', $codigo);
        
+        $select->execute();
+        $array = array();
+
+
+        if($row = $select->fetch(PDO::FETCH_ASSOC)){
+
+            $array[] = array(
+
+                'codigo' => $row['codigo'],
+                'descricao' => $row['descricao'],
+                'aliqua' => $row['aliqua'],
+                'servico' => $row['servico'],
+            );
+        }
+        return $array;
+    }
+    
+    public function selectCNAEdescricao($descr){
+
+        $paramentro = '%'.$descr.'%';
+
+        $sql = "SELECT * FROM `cnae` where  `descricao`  LIKE  :descricao ";
+        $select = $this->con->prepare($sql);
+        $select->bindValue(':descricao', $paramentro);
         $select->execute();
         $array = array();
 
