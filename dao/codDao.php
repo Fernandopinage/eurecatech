@@ -21,6 +21,7 @@ class CodDao extends Dao{
 
                 'codigo' => $row['codigo'],
                 'descricao' => $row['descricao'],
+                'descricao_prefeitura' => $row['descricao_prefeitura'],
                 'aliqua' => $row['aliqua'],
                 'servico' => $row['servico'],
             );
@@ -46,6 +47,7 @@ class CodDao extends Dao{
 
                 'codigo' => $row['codigo'],
                 'descricao' => $row['descricao'],
+                'descricao_prefeitura' => $row['descricao_prefeitura'],
                 'aliqua' => $row['aliqua'],
                 'servico' => $row['servico'],
             );
@@ -57,9 +59,9 @@ class CodDao extends Dao{
 
         $paramentro = '%'.$descr.'%';
 
-        $sql = "SELECT * FROM `cnae` where  `descricao`  LIKE  :descricao ";
+        $sql = "SELECT * FROM `cnae` where  `descricao_prefeitura`  LIKE  :descricao_prefeitura ";
         $select = $this->con->prepare($sql);
-        $select->bindValue(':descricao', $paramentro);
+        $select->bindValue(':descricao_prefeitura', $paramentro);
         $select->execute();
         $array = array();
 
@@ -70,6 +72,7 @@ class CodDao extends Dao{
 
                 'codigo' => $row['codigo'],
                 'descricao' => $row['descricao'],
+                'descricao_prefeitura' => $row['descricao_prefeitura'],
                 'aliqua' => $row['aliqua'],
                 'servico' => $row['servico'],
             );
