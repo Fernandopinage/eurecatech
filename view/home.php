@@ -20,6 +20,18 @@ if (isset($_POST['submet'])) {
 }
 
 
+if(isset($_POST['finalizar'])){
+
+   $codigo =  $_POST['post_codigo'];
+   $texto_prefeitura =  $_POST['post_descricao_prefeitura'];
+   $aliquo_prefeitura = $_POST['post_aliquo'];
+   $descricao_prefeitura = $_POST['post_descricao'];
+   $texto = $_POST['post_text'];
+
+   $Cod->validarInformarcao($codigo, $texto_prefeitura, $aliquo_prefeitura, $descricao_prefeitura, $texto);
+}
+
+
 ?>
 
 <div class="container">
@@ -116,18 +128,18 @@ if (isset($_POST['submet'])) {
 
                         if (isset($filtro)) {
 
-                            $dadoDescricao = $Cod->descricao($filtro); 
+                            $dadoDescricao = $Cod->descricao($filtro);
                             echo "<pre>";
                             //echo $dadoDescricao;
                             echo "</pre>";
-                            
+
                         ?>
                             <input type="text" class="form-control" id="codigo" name="codigo" value="<?php echo $filtro; ?>">
                             <input type="hidden" class="form-control" id="descricao_prefeitura" name="descricao_prefeitura" value="<?php echo $dado[0]['descricao_prefeitura'] ?>">
                             <input type="hidden" class="form-control" id="aliquo" name="aliquo" value="<?php echo $dado[0]['aliqua'] ?>">
                             <input type="hidden" class="form-control" id="descricao" name="descricao" value="<?php echo mb_strtoupper($dadoDescricao, 'UTF-8') ?>">
-                                                          
-                            
+
+
                         <?php
                         } else {
                         ?>
@@ -370,14 +382,14 @@ if (isset($_POST['submet'])) {
     </fieldset>
     <fieldset class="border" style="margin-top: 20px;">
         <legend class="fw-bold" style="color: #2196F5; font-size: 13px;">DESCRIÇÃO GERAL DO SERVIÇO</legend>
-        
+
         <div class="row mb-1">
             <div id="itens">
-    
-            </div>
-              <div class="mb-12">
 
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <div class="mb-12">
+
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" onblur="DescricaoFocu()"></textarea>
             </div>
         </div>
 
@@ -417,12 +429,19 @@ if (isset($_POST['submet'])) {
 
 
     </fieldset>
-
+    <hr>
     <div class="text-center" style="margin-top: 20px;">
 
         <form class="g-2" method="POST">
+
+            <input type="hidden" class="form-control" id="post_codigo" name="post_codigo" value="">
+            <input type="hidden" class="form-control" id="post_descricao_prefeitura" name="post_descricao_prefeitura" value="">
+            <input type="hidden" class="form-control" id="post_aliquo" name="post_aliquo" value="">
+            <input type="hidden" class="form-control" id="post_descricao" name="post_descricao" value="">
+            <input type="hidden" class="form-control" id="post_text" name="post_text" value="">
+
             <button type="button" class="btn btn-primary">Voltar</button>
-            <button type="submit" class="btn btn-success">Visualizar</button>
+            <button type="submit" name="finalizar" class="btn btn-success">Visualizar</button>
         </form>
     </div>
 </div>
@@ -495,10 +514,16 @@ require_once "../layout/footer.html";
 <script>
     function serviço() {
 
+        var codigo = document.getElementById('codigo').value;
         var prefeitura = document.getElementById('descricao_prefeitura').value;
         var unidade = document.getElementById('unidade').value;
         var aliquo = document.getElementById('aliquo').value;
         var descricao = document.getElementById('descricao').value;
+
+        document.getElementById('post_codigo').value = codigo
+        document.getElementById('post_descricao_prefeitura').value = prefeitura
+        document.getElementById('post_aliquo').value = aliquo
+        document.getElementById('post_descricao').value = descricao
 
 
         var label1 = document.getElementById('descricao_descricao');
@@ -526,7 +551,13 @@ require_once "../layout/footer.html";
         var labalAliquo = document.getElementById('descricao_aliquota');
         labalAliquo.innerHTML = aliquo;
 
-        document.getElementById('itens').innerHTML= descricao;
+        document.getElementById('itens').innerHTML = descricao;
+    }
+
+    function DescricaoFocu(){
+
+        var descricao = document.getElementById('exampleFormControlTextarea1').value
+        document.getElementById('post_text').value = descricao;
     }
 </script>
 <!-------------------------------------->

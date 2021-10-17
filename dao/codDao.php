@@ -110,6 +110,53 @@ class CodDao extends Dao{
         return $texto;
     }
 
+
+    public function validarInformarcao($codigo, $texto_prefeitura, $aliquo_prefeitura, $descricao_prefeitura, $texto){
+        $cont =0;
+        $soft = array('desenvolvimento', 'desenvolvedor', 'software', 'soft', "técnologia", "tecnologia", 'tec',  "informatica", "infor",  "codigo",  'código');
+
+        if($codigo === '1011'){ // definindo cnae cadastrado do usuario - cnae setado, deveria ser consultado da base de dados 
+            
+            $texto = explode(" ", $texto);
+            $tamnho = count($texto);
+
+            for($i=0 ; $i<$tamnho; $i++){
+                for($j=0 ; $j<$tamnho; $j++){
+                
+                    if($texto[$i] === $soft[$j]){
+
+                        $cont++;
+                    }
+
+                }
+            }   
+          
+            echo $cont++;
+        
+        }else{
+
+           
+            
+                $texto = explode(" ", $texto);
+                $tamnho = count($texto);
+    
+                for($i=0 ; $i<$tamnho; $i++){
+                    for($j=0 ; $j<$tamnho; $j++){
+                    
+                        if($texto[$i] === $soft[$j]){
+    
+                            $cont++;
+                        }
+    
+                    }
+                }   
+              
+                echo $cont++;
+                echo "Cnae incompativel com texto descrito";
+
+        }
+    }
+
 }
 
 
