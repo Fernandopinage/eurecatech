@@ -11,13 +11,12 @@ if (isset($_POST['submet'])) {
     $descr = $_POST['desc_servico'];
 
 
-    if(!empty($_POST['codigo_servico'])){
+    if (!empty($_POST['codigo_servico'])) {
 
         $dado = $Cod->selectCNAEcodigo($codigo);
-    }else{
+    } else {
         $dado = $Cod->selectCNAEdescricao($descr);
     }
-
 }
 
 
@@ -113,23 +112,30 @@ if (isset($_POST['submet'])) {
 
                         ?>
 
-                        <?php 
-                        
-                        if(isset($filtro)){
+                        <?php
 
-                            ?>
+                        if (isset($filtro)) {
+
+                            $dadoDescricao = $Cod->descricao($filtro); 
+                            echo "<pre>";
+                            //echo $dadoDescricao;
+                            echo "</pre>";
+                            
+                        ?>
                             <input type="text" class="form-control" id="codigo" name="codigo" value="<?php echo $filtro; ?>">
                             <input type="hidden" class="form-control" id="descricao_prefeitura" name="descricao_prefeitura" value="<?php echo $dado[0]['descricao_prefeitura'] ?>">
                             <input type="hidden" class="form-control" id="aliquo" name="aliquo" value="<?php echo $dado[0]['aliqua'] ?>">
+                            <input type="hidden" class="form-control" id="descricao" name="descricao" value="<?php echo mb_strtoupper($dadoDescricao, 'UTF-8') ?>">
+                                                          
                             
-                            <?php
-                        }else{
-                            ?>
+                        <?php
+                        } else {
+                        ?>
                             <input type="text" class="form-control" id="codigo" name="codigo" value="">
-                            
-                            <?php
+
+                        <?php
                         }
-                        
+
                         ?>
 
                     </td>
@@ -294,15 +300,15 @@ if (isset($_POST['submet'])) {
                 </tr>
             </thead>
             <tbody>
-                    <td scope="col"><label id="descricao_descricao"></label></td>
-                    <td scope="col"><label id="descricao_valor"></label></td>
-                    <td scope="col"><label id="descricao_quantidade"></label></td>
-                    <td scope="col"><label id="descricao_valor2"></label></td>
-                    <td scope="col"><label id="descricao_deducao"></label></td>
-                    <td scope="col"><label id="descricao_valor3"></label></td>
-                    <td scope="col"><label id="descricao_aliquota"></label></td>
-                    <td scope="col"><label id="descricao_iss"></label></td>
-                    <td scope="col"><label>+</label></td>
+                <td scope="col"><label id="descricao_descricao"></label></td>
+                <td scope="col"><label id="descricao_valor"></label></td>
+                <td scope="col"><label id="descricao_quantidade"></label></td>
+                <td scope="col"><label id="descricao_valor2"></label></td>
+                <td scope="col"><label id="descricao_deducao"></label></td>
+                <td scope="col"><label id="descricao_valor3"></label></td>
+                <td scope="col"><label id="descricao_aliquota"></label></td>
+                <td scope="col"><label id="descricao_iss"></label></td>
+                <td scope="col"><label>+</label></td>
             </tbody>
         </table>
     </fieldset>
@@ -364,8 +370,12 @@ if (isset($_POST['submet'])) {
     </fieldset>
     <fieldset class="border" style="margin-top: 20px;">
         <legend class="fw-bold" style="color: #2196F5; font-size: 13px;">DESCRIÇÃO GERAL DO SERVIÇO</legend>
+        
         <div class="row mb-1">
-            <div class="mb-12">
+            <div id="itens">
+    
+            </div>
+              <div class="mb-12">
 
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
@@ -407,6 +417,14 @@ if (isset($_POST['submet'])) {
 
 
     </fieldset>
+
+    <div class="text-center" style="margin-top: 20px;">
+
+        <form class="g-2" method="POST">
+            <button type="button" class="btn btn-primary">Voltar</button>
+            <button type="submit" class="btn btn-success">Visualizar</button>
+        </form>
+    </div>
 </div>
 
 <?php
@@ -431,83 +449,84 @@ require_once "../layout/footer.html";
     }
 </script>
 
-<script language="javascript">   
-function moeda(a, e, r, t) {
-    let n = ""
-      , h = j = 0
-      , u = tamanho2 = 0
-      , l = ajd2 = ""
-      , o = window.Event ? t.which : t.keyCode;
-    if (13 == o || 8 == o)
-        return !0;
-    if (n = String.fromCharCode(o),
-    -1 == "0123456789".indexOf(n))
-        return !1;
-    for (u = a.value.length,
-    h = 0; h < u && ("0" == a.value.charAt(h) || a.value.charAt(h) == r); h++)
+<script language="javascript">
+    function moeda(a, e, r, t) {
+        let n = "",
+            h = j = 0,
+            u = tamanho2 = 0,
+            l = ajd2 = "",
+            o = window.Event ? t.which : t.keyCode;
+        if (13 == o || 8 == o)
+            return !0;
+        if (n = String.fromCharCode(o),
+            -1 == "0123456789".indexOf(n))
+            return !1;
+        for (u = a.value.length,
+            h = 0; h < u && ("0" == a.value.charAt(h) || a.value.charAt(h) == r); h++)
         ;
-    for (l = ""; h < u; h++)
-        -1 != "0123456789".indexOf(a.value.charAt(h)) && (l += a.value.charAt(h));
-    if (l += n,
-    0 == (u = l.length) && (a.value = ""),
-    1 == u && (a.value = "0" + r + "0" + l),
-    2 == u && (a.value = "0" + r + l),
-    u > 2) {
-        for (ajd2 = "",
-        j = 0,
-        h = u - 3; h >= 0; h--)
-            3 == j && (ajd2 += e,
-            j = 0),
-            ajd2 += l.charAt(h),
-            j++;
-        for (a.value = "",
-        tamanho2 = ajd2.length,
-        h = tamanho2 - 1; h >= 0; h--)
-            a.value += ajd2.charAt(h);
-        a.value += r + l.substr(u - 2, u)
+        for (l = ""; h < u; h++)
+            -
+            1 != "0123456789".indexOf(a.value.charAt(h)) && (l += a.value.charAt(h));
+        if (l += n,
+            0 == (u = l.length) && (a.value = ""),
+            1 == u && (a.value = "0" + r + "0" + l),
+            2 == u && (a.value = "0" + r + l),
+            u > 2) {
+            for (ajd2 = "",
+                j = 0,
+                h = u - 3; h >= 0; h--)
+                3 == j && (ajd2 += e,
+                    j = 0),
+                ajd2 += l.charAt(h),
+                j++;
+            for (a.value = "",
+                tamanho2 = ajd2.length,
+                h = tamanho2 - 1; h >= 0; h--)
+                a.value += ajd2.charAt(h);
+            a.value += r + l.substr(u - 2, u)
+        }
+        return !1
     }
-    return !1
-}
- </script> 
+</script>
 
 
 
 <!-------------------------------------->
 <script>
+    function serviço() {
+
+        var prefeitura = document.getElementById('descricao_prefeitura').value;
+        var unidade = document.getElementById('unidade').value;
+        var aliquo = document.getElementById('aliquo').value;
+        var descricao = document.getElementById('descricao').value;
 
 
-  function serviço(){
-     
-     var prefeitura = document.getElementById('descricao_prefeitura').value;
-     var unidade = document.getElementById('unidade').value;
-     var aliquo = document.getElementById('aliquo').value;
-
-     var label1 = document.getElementById('descricao_descricao');
-       label1.innerHTML =  prefeitura;
+        var label1 = document.getElementById('descricao_descricao');
+        label1.innerHTML = prefeitura;
 
 
-    var total = document.getElementById('valorUnitario').value; 
-    var valor = document.getElementById('descricao_valor');
-       valor.innerHTML =  total;
-
-    
-    var valor2 = document.getElementById('descricao_valor2');
-       valor2.innerHTML =  total;
-   
-    
-      
-    var valor3 = document.getElementById('descricao_valor3');
-       valor3.innerHTML =  total;
-       
-      var unidade = document.getElementById('unidade').value
-      var labalUnidade = document.getElementById('descricao_quantidade')
-      labalUnidade.innerHTML = unidade; 
+        var total = document.getElementById('valorUnitario').value;
+        var valor = document.getElementById('descricao_valor');
+        valor.innerHTML = total;
 
 
-      var labalAliquo = document.getElementById('descricao_aliquota');
-      labalAliquo.innerHTML = aliquo;
-  }
+        var valor2 = document.getElementById('descricao_valor2');
+        valor2.innerHTML = total;
 
 
- </script>  
+
+        var valor3 = document.getElementById('descricao_valor3');
+        valor3.innerHTML = total;
+
+        var unidade = document.getElementById('unidade').value
+        var labalUnidade = document.getElementById('descricao_quantidade')
+        labalUnidade.innerHTML = unidade;
+
+
+        var labalAliquo = document.getElementById('descricao_aliquota');
+        labalAliquo.innerHTML = aliquo;
+
+        document.getElementById('itens').innerHTML= descricao;
+    }
+</script>
 <!-------------------------------------->

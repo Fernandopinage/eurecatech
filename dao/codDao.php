@@ -80,6 +80,36 @@ class CodDao extends Dao{
         return $array;
     }
 
+    public function descricao($codigo){
+
+        $sql = "SELECT * FROM `cnae` where  `servico`  =  :servico ";
+        $select = $this->con->prepare($sql);
+        $select->bindValue(':servico', $codigo);
+        $select->execute();
+        $array = array();
+
+
+        while($row = $select->fetch(PDO::FETCH_ASSOC)){
+
+            $array[] = array(
+
+                
+                'descricao' => $row['descricao'],
+
+            );
+        }
+
+        $tamnho  = count($array);
+        $texto ="";
+        for($i=0; $i< $tamnho; $i++){
+
+            $texto .= $array[$i]['descricao'].",";
+
+        }
+
+        return $texto;
+    }
+
 }
 
 
