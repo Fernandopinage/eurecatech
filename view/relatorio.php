@@ -9,7 +9,7 @@ include_once "../layout/head.php";
                 <th scope="col">COD</th>
                 <th scope="col">NOME</th>
                 <th scope="col">CNPJ</th>
-                <th scope="col">SERVIÇO</th>
+                <th scope="col">PREVIEW</th>
             </tr>
         </thead>
         <tbody>
@@ -17,61 +17,61 @@ include_once "../layout/head.php";
                 <th scope="row">1</th>
                 <td>Luciana Rodrigues Cirino </td>
                 <td>54.870.138/0001-70</td>
-                <td>@mdo</td>
+                <td><img src="../icons/view.png" width="22px"></td>
             </tr>
             <tr>
                 <th scope="row">2</th>
                 <td>Davi lopes Viana Silva </td>
                 <td>58.963.740/0001-03</td>
-                <td>@fat</td>
+                <td><img src="../icons/view.png" width="22px"></td>
             </tr>
             <tr>
                 <th scope="row">3</th>
                 <td>Camila Vitória Dantas de Souza</td>
                 <td>07.783.193/0001-43</td>
-                <td>@fat</td>
+                <td><img src="../icons/view.png" width="22px"></td>
             </tr>
             <tr>
                 <th scope="row">4</th>
                 <td>William Reynaldo Lemos Guimarães Silva</td>
                 <td>18.702.649/0001-10</td>
-                <td>@mdo</td>
+                <td><img src="../icons/view.png" width="22px"></td>
             </tr>
             <tr>
                 <th scope="row">5</th>
                 <td>Jacob</td>
                 <td>60.168.363/0001-62</td>
-                <td>@fat</td>
+                <td><img src="../icons/view.png" width="22px"></td>
             </tr>
             <tr>
                 <th scope="row">6</th>
                 <td>Maria Vitória Nazário Leite Nazário</td>
                 <td>93.725.973/0001-79</td>
-                <td>@fat</td>
+                <td><img src="../icons/view.png" width="22px"></td>
             </tr>
             <tr>
                 <th scope="row">7</th>
                 <td>Maria Paula Felismino de Sales Nunes</td>
                 <td>93.725.973/0001-79</td>
-                <td>@mdo</td>
+                <td><img src="../icons/view.png" width="22px"></td>
             </tr>
             <tr>
                 <th scope="row">8</th>
                 <td>Jacob</td>
                 <td>46.632.576/0001-72</td>
-                <td>@fat</td>
+                <td><img src="../icons/view.png" width="22px"></td>
             </tr>
             <tr>
                 <th scope="row">9</th>
                 <td>Francisco Geovany Alves dos Santos</td>
                 <td>41.916.726/0001-56</td>
-                <td>@fat</td>
+                <td><img src="../icons/view.png" width="22px"></td>
             </tr>
             <tr>
                 <th scope="row">10</th>
                 <td>Esther Lopes Neves</td>
                 <td>34.134.499/0001-41</td>
-                <td>@fat</td>
+                <td><img src="../icons/view.png" width="22px"></td>
             </tr>
         </tbody>
     </table>
