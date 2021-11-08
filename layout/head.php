@@ -22,7 +22,7 @@
 </nav>
 <nav class="navbar navbar-expand-lg" style="background-color: #3263A6;">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Perfil</a>
+        <a class="navbar-brand" href="http://localhost/eurecatech/view/home.php">Perfil</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"><img src="../imgs/232021826_154016596844014_5388734205509322776_n.jpg"
