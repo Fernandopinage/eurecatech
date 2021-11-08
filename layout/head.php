@@ -46,60 +46,30 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#" style="color: white;margin-left: 15px">Canal Aberto</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#Relatorio"
-                        style="color: white;margin-left: 15px">Relatório </a>
-                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" style="color: white;margin-left: 15px">Relatório</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="?p=relatorio">Não Conformidade</a></li>
+                    </ul>
+                  </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" style="color: white;margin-left: 15px">Sair</a>
                 </li>
             </ul>
         </div>
-        <!-- Modal -->
-        <div class="modal fade" id="Relatorio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Auditoria</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <table>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
-                              </tr>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">3</th>
-                                    <td colspan="2">Larry the Bird</td>
-                                    <td>@twitter</td>
-                                  </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                       <!--- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn btn-primary"></button> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        
 </nav>
 
 <body>
+
+<?php
+
+
+if(isset($_GET['p'])){
+
+    header('Location: http://localhost/eurecatech/view/relatorio.php');
+}
+
+
+?>
+    
